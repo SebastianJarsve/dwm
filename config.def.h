@@ -18,7 +18,7 @@ static const char col_yellow[]      = "#ffff00";
 static const char col_white[]       = "#ffffff";
 
 static const char *colors[][3]      = {
-	/*					fg         bg          border   */
+	/*               fg           bg          border   */
 	[SchemeNorm] =	 { col_gray3, col_gray1,  col_gray2 },
 	[SchemeSel]  =	 { col_gray4, col_cyan,   col_cyan },
 	[SchemeWarn] =	 { col_black, col_yellow, col_red },
@@ -51,6 +51,7 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 	{ "|M|",      centeredmaster },
 	{ ">M>",      centeredfloatingmaster },
+	{ NULL,       NULL },
 };
 
 /* key definitions */
@@ -88,6 +89,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
+	{ MODKEY|ControlMask,           XK_comma,  cyclelayout,    {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
