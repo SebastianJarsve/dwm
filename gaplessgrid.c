@@ -17,15 +17,17 @@ gaplessgrid(Monitor *m) {
 
 	/* window geometries */
 	cw = cols ? m->ww / cols : m->ww;
+	cw = cw - m->gappx;
 	cn = 0; /* current column number */
 	rn = 0; /* current row number */
 	for(i = 0, c = nexttiled(m->clients); c; i++, c = nexttiled(c->next)) {
 		if(i/rows + 1 > cols - n%cols)
 			rows = n/cols + 1;
 		ch = rows ? m->wh / rows : m->wh;
-		cx = m->wx + cn*cw;
-		cy = m->wy + rn*ch;
-		resize(c, cx, cy, cw - 2 * c->bw, ch - 2 * c->bw, False);
+		ch = ch - m->gappx;
+		cx = m->wx + cn*cw + m->gappx;
+		cy = m->wy + rn*ch + m->gappx;
+		resize(c, cx, cy, (cw - 2 * c->bw) - m->gappx, ch - 2 * c->bw - m->gappx, False);
 		rn++;
 		if(rn >= rows) {
 			rn = 0;
