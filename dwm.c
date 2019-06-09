@@ -1378,7 +1378,7 @@ recttomon(int x, int y, int w, int h)
 void
 resize(Client *c, int x, int y, int w, int h, int interact)
 {
-	if (applysizehints(c, &x, &y, &w, &h, interact))
+	if (applysizehints(c, &x, &y, &w, &h, interact) || c->mon->lt[c->mon->sellt]->arrange == &monocle)
 		resizeclient(c, x, y, w, h);
 }
 
