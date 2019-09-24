@@ -1624,6 +1624,14 @@ setlayout(const Arg *arg)
 		arrange(selmon);
 	else
 		drawbar(selmon);
+	if (selmon->lt[selmon->sellt]->arrange == &monocle) {
+		togglebar(NULL);
+	} else {
+		selmon->showbar = selmon->pertag->showbars[selmon->pertag->curtag] = 1;
+		updatebarpos(selmon);
+		XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
+		arrange(selmon);
+	}
 }
 
 /* arg > 1.0 will set mfact absolutely */
